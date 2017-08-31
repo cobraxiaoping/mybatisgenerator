@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 是否自动去除生成的注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/ssm" userId="root" password="123456" />
+			
+		<!-- 默认为false 把JDBC DECIMAL和NUMERIC类型解析为Integer，true时把 JDBC DECIMAL和NUMERIC类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--targetPackage 生成POJO的位置 -->
+		<javaModelGenerator targetPackage="com.cobra.pojo"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- targetPackage mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="com.cobra.mapper"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- targetPackage mapper映射接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.cobra.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 数据库中的所有表 -->
+		<table tableName="%"></table>
+		<!-- 		<table schema="" tableName="zduser"></table> -->
+	</context>
+</generatorConfiguration>

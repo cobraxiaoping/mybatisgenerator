@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cobra.mapper.ZduserMapper">
+  <resultMap id="BaseResultMap" type="com.cobra.pojo.Zduser">
+    <id column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="RealName" jdbcType="VARCHAR" property="realname" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="BranchInnerCode" jdbcType="VARCHAR" property="branchinnercode" />
+    <result column="IsBranchAdmin" jdbcType="VARCHAR" property="isbranchadmin" />
+    <result column="Status" jdbcType="VARCHAR" property="status" />
+    <result column="Type" jdbcType="VARCHAR" property="type" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Tel" jdbcType="VARCHAR" property="tel" />
+    <result column="Mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="LastLoginTime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="LastLoginIP" jdbcType="VARCHAR" property="lastloginip" />
+    <result column="Prop1" jdbcType="VARCHAR" property="prop1" />
+    <result column="Prop2" jdbcType="VARCHAR" property="prop2" />
+    <result column="Prop6" jdbcType="VARCHAR" property="prop6" />
+    <result column="Prop5" jdbcType="VARCHAR" property="prop5" />
+    <result column="Prop4" jdbcType="VARCHAR" property="prop4" />
+    <result column="Prop3" jdbcType="VARCHAR" property="prop3" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="AddUser" jdbcType="VARCHAR" property="adduser" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+    <result column="ModifyUser" jdbcType="VARCHAR" property="modifyuser" />
+    <result column="LoginErrorCount" jdbcType="BIGINT" property="loginerrorcount" />
+    <result column="LoginErrorTime" jdbcType="TIMESTAMP" property="loginerrortime" />
+    <result column="ModifyPassStatus" jdbcType="VARCHAR" property="modifypassstatus" />
+    <result column="ForbiddenLoginTime" jdbcType="TIMESTAMP" property="forbiddenlogintime" />
+    <result column="LastModifyPassTime" jdbcType="TIMESTAMP" property="lastmodifypasstime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UserName, RealName, Password, BranchInnerCode, IsBranchAdmin, Status, Type, Email, 
+    Tel, Mobile, LastLoginTime, LastLoginIP, Prop1, Prop2, Prop6, Prop5, Prop4, Prop3, 
+    Memo, AddTime, AddUser, ModifyTime, ModifyUser, LoginErrorCount, LoginErrorTime, 
+    ModifyPassStatus, ForbiddenLoginTime, LastModifyPassTime
+  </sql>
+  <select id="selectByExample" parameterType="com.cobra.pojo.ZduserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zduser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zduser
+    where UserName = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zduser
+    where UserName = #{username,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cobra.pojo.ZduserExample">
+    delete from zduser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cobra.pojo.Zduser">
+    insert into zduser (UserName, RealName, Password, 
+      BranchInnerCode, IsBranchAdmin, Status, 
+      Type, Email, Tel, Mobile, 
+      LastLoginTime, LastLoginIP, Prop1, 
+      Prop2, Prop6, Prop5, 
+      Prop4, Prop3, Memo, 
+      AddTime, AddUser, ModifyTime, 
+      ModifyUser, LoginErrorCount, LoginErrorTime, 
+      ModifyPassStatus, ForbiddenLoginTime, 
+      LastModifyPassTime)
+    values (#{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{branchinnercode,jdbcType=VARCHAR}, #{isbranchadmin,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{lastlogintime,jdbcType=TIMESTAMP}, #{lastloginip,jdbcType=VARCHAR}, #{prop1,jdbcType=VARCHAR}, 
+      #{prop2,jdbcType=VARCHAR}, #{prop6,jdbcType=VARCHAR}, #{prop5,jdbcType=VARCHAR}, 
+      #{prop4,jdbcType=VARCHAR}, #{prop3,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{adduser,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, 
+      #{modifyuser,jdbcType=VARCHAR}, #{loginerrorcount,jdbcType=BIGINT}, #{loginerrortime,jdbcType=TIMESTAMP}, 
+      #{modifypassstatus,jdbcType=VARCHAR}, #{forbiddenlogintime,jdbcType=TIMESTAMP}, 
+      #{lastmodifypasstime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cobra.pojo.Zduser">
+    insert into zduser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="realname != null">
+        RealName,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="branchinnercode != null">
+        BranchInnerCode,
+      </if>
+      <if test="isbranchadmin != null">
+        IsBranchAdmin,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="tel != null">
+        Tel,
+      </if>
+      <if test="mobile != null">
+        Mobile,
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime,
+      </if>
+      <if test="lastloginip != null">
+        LastLoginIP,
+      </if>
+      <if test="prop1 != null">
+        Prop1,
+      </if>
+      <if test="prop2 != null">
+        Prop2,
+      </if>
+      <if test="prop6 != null">
+        Prop6,
+      </if>
+      <if test="prop5 != null">
+        Prop5,
+      </if>
+      <if test="prop4 != null">
+        Prop4,
+      </if>
+      <if test="prop3 != null">
+        Prop3,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="adduser != null">
+        AddUser,
+      </if>
+      <if test="modifytime != null">
+        ModifyTime,
+      </if>
+      <if test="modifyuser != null">
+        ModifyUser,
+      </if>
+      <if test="loginerrorcount != null">
+        LoginErrorCount,
+      </if>
+      <if test="loginerrortime != null">
+        LoginErrorTime,
+      </if>
+      <if test="modifypassstatus != null">
+        ModifyPassStatus,
+      </if>
+      <if test="forbiddenlogintime != null">
+        ForbiddenLoginTime,
+      </if>
+      <if test="lastmodifypasstime != null">
+        LastModifyPassTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="branchinnercode != null">
+        #{branchinnercode,jdbcType=VARCHAR},
+      </if>
+      <if test="isbranchadmin != null">
+        #{isbranchadmin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginip != null">
+        #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="prop1 != null">
+        #{prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="prop2 != null">
+        #{prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="prop6 != null">
+        #{prop6,jdbcType=VARCHAR},
+      </if>
+      <if test="prop5 != null">
+        #{prop5,jdbcType=VARCHAR},
+      </if>
+      <if test="prop4 != null">
+        #{prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="prop3 != null">
+        #{prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null">
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="loginerrorcount != null">
+        #{loginerrorcount,jdbcType=BIGINT},
+      </if>
+      <if test="loginerrortime != null">
+        #{loginerrortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifypassstatus != null">
+        #{modifypassstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="forbiddenlogintime != null">
+        #{forbiddenlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifypasstime != null">
+        #{lastmodifypasstime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cobra.pojo.ZduserExample" resultType="java.lang.Long">
+    select count(*) from zduser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zduser
+    <set>
+      <if test="record.username != null">
+        UserName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null">
+        RealName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchinnercode != null">
+        BranchInnerCode = #{record.branchinnercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbranchadmin != null">
+        IsBranchAdmin = #{record.isbranchadmin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        Type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        Tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        Mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null">
+        LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastloginip != null">
+        LastLoginIP = #{record.lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop1 != null">
+        Prop1 = #{record.prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop2 != null">
+        Prop2 = #{record.prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop6 != null">
+        Prop6 = #{record.prop6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop5 != null">
+        Prop5 = #{record.prop5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop4 != null">
+        Prop4 = #{record.prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop3 != null">
+        Prop3 = #{record.prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null">
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adduser != null">
+        AddUser = #{record.adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifytime != null">
+        ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyuser != null">
+        ModifyUser = #{record.modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginerrorcount != null">
+        LoginErrorCount = #{record.loginerrorcount,jdbcType=BIGINT},
+      </if>
+      <if test="record.loginerrortime != null">
+        LoginErrorTime = #{record.loginerrortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifypassstatus != null">
+        ModifyPassStatus = #{record.modifypassstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forbiddenlogintime != null">
+        ForbiddenLoginTime = #{record.forbiddenlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifypasstime != null">
+        LastModifyPassTime = #{record.lastmodifypasstime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zduser
+    set UserName = #{record.username,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      BranchInnerCode = #{record.branchinnercode,jdbcType=VARCHAR},
+      IsBranchAdmin = #{record.isbranchadmin,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=VARCHAR},
+      Type = #{record.type,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Tel = #{record.tel,jdbcType=VARCHAR},
+      Mobile = #{record.mobile,jdbcType=VARCHAR},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      LastLoginIP = #{record.lastloginip,jdbcType=VARCHAR},
+      Prop1 = #{record.prop1,jdbcType=VARCHAR},
+      Prop2 = #{record.prop2,jdbcType=VARCHAR},
+      Prop6 = #{record.prop6,jdbcType=VARCHAR},
+      Prop5 = #{record.prop5,jdbcType=VARCHAR},
+      Prop4 = #{record.prop4,jdbcType=VARCHAR},
+      Prop3 = #{record.prop3,jdbcType=VARCHAR},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      AddUser = #{record.adduser,jdbcType=VARCHAR},
+      ModifyTime = #{record.modifytime,jdbcType=TIMESTAMP},
+      ModifyUser = #{record.modifyuser,jdbcType=VARCHAR},
+      LoginErrorCount = #{record.loginerrorcount,jdbcType=BIGINT},
+      LoginErrorTime = #{record.loginerrortime,jdbcType=TIMESTAMP},
+      ModifyPassStatus = #{record.modifypassstatus,jdbcType=VARCHAR},
+      ForbiddenLoginTime = #{record.forbiddenlogintime,jdbcType=TIMESTAMP},
+      LastModifyPassTime = #{record.lastmodifypasstime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cobra.pojo.Zduser">
+    update zduser
+    <set>
+      <if test="realname != null">
+        RealName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="branchinnercode != null">
+        BranchInnerCode = #{branchinnercode,jdbcType=VARCHAR},
+      </if>
+      <if test="isbranchadmin != null">
+        IsBranchAdmin = #{isbranchadmin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        Tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginip != null">
+        LastLoginIP = #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="prop1 != null">
+        Prop1 = #{prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="prop2 != null">
+        Prop2 = #{prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="prop6 != null">
+        Prop6 = #{prop6,jdbcType=VARCHAR},
+      </if>
+      <if test="prop5 != null">
+        Prop5 = #{prop5,jdbcType=VARCHAR},
+      </if>
+      <if test="prop4 != null">
+        Prop4 = #{prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="prop3 != null">
+        Prop3 = #{prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        AddUser = #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null">
+        ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null">
+        ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="loginerrorcount != null">
+        LoginErrorCount = #{loginerrorcount,jdbcType=BIGINT},
+      </if>
+      <if test="loginerrortime != null">
+        LoginErrorTime = #{loginerrortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifypassstatus != null">
+        ModifyPassStatus = #{modifypassstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="forbiddenlogintime != null">
+        ForbiddenLoginTime = #{forbiddenlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifypasstime != null">
+        LastModifyPassTime = #{lastmodifypasstime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UserName = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cobra.pojo.Zduser">
+    update zduser
+    set RealName = #{realname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      BranchInnerCode = #{branchinnercode,jdbcType=VARCHAR},
+      IsBranchAdmin = #{isbranchadmin,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Tel = #{tel,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      LastLoginIP = #{lastloginip,jdbcType=VARCHAR},
+      Prop1 = #{prop1,jdbcType=VARCHAR},
+      Prop2 = #{prop2,jdbcType=VARCHAR},
+      Prop6 = #{prop6,jdbcType=VARCHAR},
+      Prop5 = #{prop5,jdbcType=VARCHAR},
+      Prop4 = #{prop4,jdbcType=VARCHAR},
+      Prop3 = #{prop3,jdbcType=VARCHAR},
+      Memo = #{memo,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      AddUser = #{adduser,jdbcType=VARCHAR},
+      ModifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      LoginErrorCount = #{loginerrorcount,jdbcType=BIGINT},
+      LoginErrorTime = #{loginerrortime,jdbcType=TIMESTAMP},
+      ModifyPassStatus = #{modifypassstatus,jdbcType=VARCHAR},
+      ForbiddenLoginTime = #{forbiddenlogintime,jdbcType=TIMESTAMP},
+      LastModifyPassTime = #{lastmodifypasstime,jdbcType=TIMESTAMP}
+    where UserName = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>
